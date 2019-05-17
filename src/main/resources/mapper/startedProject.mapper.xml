@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangmeng.cmzc.startedProject.dao.StartedProjectMapper">
+
+    <!--添加项目-->
+    <insert id="addProject">
+        insert into tb_project(project_id,type_id,business_id,project_name,project_expect_money,project_real_money,project_start_time,project_end_time,project_zan,
+project_video,project_imgs,project_pic,project_title_pic1,project_title_pic2,project_status,project_spare1,project_spare2
+)values(#{projectId},#{typeId},#{businessId},#{projectName},#{projectExpectMoney},#{projectRealMoney},#{projectStartTime},#{projectEndTime},
+#{projectZan},#{projectVideo},#{projectImgs},#{projectPic},#{projectTitlePic1},#{projectTitlePic2},#{projectStatus},#{projectSpare1},#{projectSpare2}
+)
+    </insert>
+    <!--添加项目套餐-->
+    <insert id="addPackage">
+        insert into tb_package(package_id,project_id,package_price,package_num,package_residue,package_info,package_pic,package_gift,
+package_post_fee,package_return_time,package_spare1,package_spare2 )values(#{packageId},#{projectId},#{packagePrice},#{packageNum},#{packageResidue},
+#{packageInfo},#{packagePic},#{packageGift},#{packagePostFee},#{packageReturnTime},#{packageSpare1},#{packageSpare2} )
+    </insert>
+
+    <!--项目类型查询-->
+    <resultMap id="TypeMap" type="com.chuangmeng.cmzc.commons.po.TbProjectType">
+        <id property="typeId" column="type_id" javaType="java.lang.String"/>
+        <result property="typeFid" column="type_fid" javaType="java.lang.String"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="queryType" resultMap="TypeMap">
+        select type_id,type_fid,type_name  from tb_project_type where type_fid!=''
+    </select>
+</mapper>
