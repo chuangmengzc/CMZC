@@ -1,4 +1,4 @@
-package com.chuangmeng.cmzc.backStage.mapper;
+package com.chuangmeng.cmzc.backStage.dao;
 
 import com.chuangmeng.cmzc.commons.PO.TbBill;
 import com.chuangmeng.cmzc.commons.VO.BackStage.AdminInfo;
@@ -14,7 +14,7 @@ public interface IBackStageMapper {
     List<AuditProject> queryAuditProject();
     List<AuditProject> queryFrozenProject();
     List<QueryBill> queryBill();
-    void changeProjectStatus(@Param("projectId") int status,@Param("projectId") String projectId);
+    void changeProjectStatus(@Param("status") int status,@Param("projectId") String projectId);
     void businessGetMoney(@Param("FrozenMoney") int FrozenMoney,@Param("businessId") String businessId);
     void insertBill(TbBill bill);
 }
