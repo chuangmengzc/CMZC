@@ -9,5 +9,8 @@
         <module name="cmzc" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cmzc" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
