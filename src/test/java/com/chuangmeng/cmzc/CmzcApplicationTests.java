@@ -1,8 +1,6 @@
 package com.chuangmeng.cmzc;
 
 import com.chuangmeng.cmzc.commons.RandString;
-import com.chuangmeng.cmzc.commons.po.TbPackage;
-import com.chuangmeng.cmzc.commons.po.TbProject;
 import com.chuangmeng.cmzc.startedProject.dao.StartedProjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

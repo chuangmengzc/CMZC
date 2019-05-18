@@ -1,4 +1,4 @@
-package com.chuangmeng.cmzc.commons.vo;
+package com.chuangmeng.cmzc.commons.VO;
 
 public class ResultVo {
     String code;

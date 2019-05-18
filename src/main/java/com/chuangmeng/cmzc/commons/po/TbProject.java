@@ -1,4 +1,4 @@
-package com.chuangmeng.cmzc.commons.po;
+package com.chuangmeng.cmzc.commons.PO;
 
 
 import java.util.Date;

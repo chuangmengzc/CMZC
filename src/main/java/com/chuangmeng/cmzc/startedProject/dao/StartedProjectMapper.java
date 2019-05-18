@@ -1,8 +1,8 @@
 package com.chuangmeng.cmzc.startedProject.dao;
 
-import com.chuangmeng.cmzc.commons.po.TbPackage;
-import com.chuangmeng.cmzc.commons.po.TbProject;
-import com.chuangmeng.cmzc.commons.po.TbProjectType;
+import com.chuangmeng.cmzc.commons.PO.TbPackage;
+import com.chuangmeng.cmzc.commons.PO.TbProject;
+import com.chuangmeng.cmzc.commons.PO.TbProjectType;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.chuangmeng.cmzc.commons.vo;
+package com.chuangmeng.cmzc.commons.VO;
 
 import org.springframework.web.multipart.MultipartFile;
 
