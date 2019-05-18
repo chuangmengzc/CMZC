@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangmeng.cmzc.user.dao.UserMapper">
+    <resultMap id="baseMap" type="com.chuangmeng.cmzc.commons.PO.TbUser">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="userName" column="user_name" javaType="java.lang.String"/>
+        <result property="userPic" column="user_pic" javaType="java.lang.String"/>
+        <result property="userPayPsw" column="user_pay_psw" javaType="java.lang.String"/>
+        <result property="user_tel" column="userTel" javaType="java.lang.String"/>
+        <result column ="user_password" property="userPassword" javaType="java.lang.String"/>
+        <result column="user_money" property="userMoney" javaType="java.lang.Integer"/>
+        <result column="user_spare1" property="userSpare1" javaType="java.lang.String"/>
+        <result column="user_spare2" property="userSpare2" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="selectUserByTel" resultMap="baseMap">
+        select * from tb_user where
+          <if test="userTel!=null" >
+                user_tel=#{userTel}
+            </if>
+            <if test="userId!=null">
+                user_id=#{userId}
+            </if>
+    </select>
+
+    <insert id="useradd">
+        insert into tb_user(user_id,user_name,user_pic,user_pay_psw,user_tel,user_password,user_money,user_spare1,user_spare2)
+                  values(#{userId},#{userName},#{userPic},#{userPayPsw},#{userTel},#{userPassword},#{userMoney},#{userSpare1},#{userSpare2});
+    </insert>
+
+</mapper>

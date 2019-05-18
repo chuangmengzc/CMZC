@@ -1,5 +1,6 @@
 package com.chuangmeng.cmzc.startedProject.controller;
 
+import com.chuangmeng.cmzc.commons.DIR;
 import com.chuangmeng.cmzc.commons.dto.Project;
 import com.chuangmeng.cmzc.commons.po.TbPackage;
 import com.chuangmeng.cmzc.commons.po.TbProject;
@@ -58,16 +59,16 @@ public  String   addProject(PackageImgsVo packageImgsVo, String TbPackage, Proje
         StringBuilder pic=new StringBuilder();
         for(MultipartFile multipartFile:projectImgs){
 //            imgs.append(multipartFile.getOriginalFilename()+RandString.generateString(20)+"|");
-            imgs.append(BackStageUtils.uploadFile(multipartFile));
+            imgs.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT));
         }
         for(MultipartFile multipartFile:projectPic){
 //            pic.append(multipartFile.getOriginalFilename()+RandString.generateString(20)+"|");
-            pic.append(BackStageUtils.uploadFile(multipartFile));
+            pic.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT));
         }
 //        String pic1= projectTitlePic1.getOriginalFilename()+RandString.generateString(20);
-        String pic1=BackStageUtils.uploadFile(projectTitlePic1);
+        String pic1=BackStageUtils.uploadFile(projectTitlePic1,DIR.PROJECT);
 //        String pic2= projectTitlePic2.getOriginalFilename()+RandString.generateString(20);
-        String pic2=BackStageUtils.uploadFile(projectTitlePic2);
+        String pic2=BackStageUtils.uploadFile(projectTitlePic2,DIR.PROJECT);
 //        tbProject.setProjectVideo(video);
         tbProject.setProjectImgs(imgs.toString());
         tbProject.setProjectPic(pic.toString());
@@ -85,15 +86,15 @@ public  String   addProject(PackageImgsVo packageImgsVo, String TbPackage, Proje
 //            tbPackage.setPackagePic(f[4]);
             String s;
             if(i==1){
-                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic1());
+                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic1(), DIR.PACKAGE);
             }else if(i==2){
-               s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic2());
+               s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic2(),DIR.PACKAGE);
             }else if(i==3){
-                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic3());
+                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic3(),DIR.PACKAGE);
             }else if(i==4){
-                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic4());
+                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic4(),DIR.PACKAGE);
             }else{
-                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic5());
+                s = BackStageUtils.uploadFile(packageImgsVo.getPackagePic5(),DIR.PACKAGE);
             }
             i++;
             tbPackage.setPackagePic(s);
@@ -118,6 +119,6 @@ public  String   addProject(PackageImgsVo packageImgsVo, String TbPackage, Proje
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "startedProject";
+        return "startedproject/startedProject";
     }
 }
