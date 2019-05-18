@@ -4,4 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chuangmeng.cmzc.warmUp.dao.WarmUpMapper">
 
+    <resultMap id="warmUpMap" type="com.chuangmeng.cmzc.commons.dto.WarmUp">
+        <id property="projectId" column="project_id" javaType="java.lang.String"/>
+        <result property="typeId" column="type_id" javaType="java.lang.String"/>
+        <result property="businessId" column="business_id" javaType="java.lang.String"/>
+        <result property="projectName" column="project_name" javaType="java.lang.String"/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+        <result property="" column="" javaType=""/>
+    </resultMap>
 </mapper>
+        <!--private String projectName;-->
+        <!--private long projectExpectMoney;-->
+        <!--private long projectRealMoney;-->
+        <!--private java.util.Date projectStartTime;-->
+        <!--private java.util.Date projectEndTime;-->
+        <!--private long projectZan;-->
+        <!--private String projectVideo;-->
+        <!--private String projectImgs;-->
+        <!--private String projectPic;-->
+        <!--private String projectTitlePic1;-->
+        <!--private String projectTitlePic2;-->
+        <!--private long projectStatus;-->
+        <!--private String projectSpare1;-->
+        <!--private String projectSpare2;-->
+        <!--private List<TbPackage> packages;-->
