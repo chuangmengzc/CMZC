@@ -1,6 +1,6 @@
 package com.chuangmeng.cmzc.backStage.service.impl;
 
-import com.chuangmeng.cmzc.backStage.mapper.IBackStageMapper;
+import com.chuangmeng.cmzc.backStage.dao.IBackStageMapper;
 import com.chuangmeng.cmzc.backStage.service.IBackStageService;
 import com.chuangmeng.cmzc.commons.PO.TbBill;
 import com.chuangmeng.cmzc.commons.VO.BackStage.AdminInfo;
@@ -9,7 +9,6 @@ import com.chuangmeng.cmzc.commons.VO.BackStage.QueryBill;
 import com.chuangmeng.cmzc.commons.utils.BackStageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

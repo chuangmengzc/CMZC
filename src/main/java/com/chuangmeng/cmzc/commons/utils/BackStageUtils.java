@@ -18,7 +18,7 @@ public class BackStageUtils {
      * @param uploadFile    需要上传的文件
      * @return              文件上传后的绝对地址
      */
-    public String uploadFile(MultipartFile uploadFile,DIR dir) throws IOException {
+    public static String uploadFile(MultipartFile uploadFile,DIR dir) throws IOException {
         String filename = uploadFile.getOriginalFilename().substring(uploadFile.getOriginalFilename().lastIndexOf("."));
         long timeMillis = System.currentTimeMillis();
         filename = timeMillis+"Pic"+filename;

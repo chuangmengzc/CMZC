@@ -1,6 +1,6 @@
 package com.chuangmeng.cmzc;
 
-import com.chuangmeng.cmzc.backStage.mapper.IBackStageMapper;
+import com.chuangmeng.cmzc.backStage.dao.IBackStageMapper;
 import com.chuangmeng.cmzc.backStage.service.IBackStageService;
 import com.chuangmeng.cmzc.commons.PO.TbBill;
 import com.chuangmeng.cmzc.commons.VO.BackStage.AdminInfo;
@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
