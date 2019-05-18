@@ -325,7 +325,7 @@ function insertRowsc(obj, k) {
 		   // cell.innerHTML = '<input id="'+idstr+'" name="'+idstr+'" type="\'+type+\'" style="width:200px" value="" />';
             cell.innerHTML = '<input id="'+idstr+'" onkeyup="checkVal(this);" name="'+idstr+'" style="width:200px" type="'+type+'" value="" />';
 		}
-		if(i==2){
+		if(i==2||i==3){
             cell.innerHTML = '<input id="'+idstr+'" name="'+idstr+'" type="\'+type+\'" style="width:100px" value=""/>';
 		}
 		//alert(cell.innerHTML);

@@ -20,7 +20,7 @@ package_post_fee,package_return_time,package_spare1,package_spare2 )values(#{pac
     </insert>
 
     <!--项目类型查询-->
-    <resultMap id="TypeMap" type="com.chuangmeng.cmzc.commons.po.TbProjectType">
+    <resultMap id="TypeMap" type="com.chuangmeng.cmzc.commons.PO.TbProjectType">
         <id property="typeId" column="type_id" javaType="java.lang.String"/>
         <result property="typeFid" column="type_fid" javaType="java.lang.String"/>
         <result property="typeName" column="type_name" javaType="java.lang.String"/>
