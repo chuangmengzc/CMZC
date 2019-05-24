@@ -11,6 +11,7 @@ public class Project {
   private String projectSpare1;
   private String projectSpare2;
 
+
   public String getTypeId() {
     return typeId;
   }

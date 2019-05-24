@@ -4,36 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chuangmeng.cmzc.warmUp.dao.WarmUpMapper">
 
-    <resultMap id="warmUpMap" type="com.chuangmeng.cmzc.commons.dto.WarmUp">
+    <resultMap id="warmUpMap" type="com.chuangmeng.cmzc.commons.dto.FirFProject">
         <id property="projectId" column="project_id" javaType="java.lang.String"/>
         <result property="typeId" column="type_id" javaType="java.lang.String"/>
         <result property="businessId" column="business_id" javaType="java.lang.String"/>
         <result property="projectName" column="project_name" javaType="java.lang.String"/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-        <result property="" column="" javaType=""/>
-    </resultMap>
+        <result property="projectExpectMoney" column="project_expect_money" javaType="java.lang.Long"/>
+        <result property="projectRealMoney" column="project_real_money" javaType="java.lang.Long"/>
+        <result property="projectStartTime" column="project_start_time" javaType="java.util.Date"/>
+        <result property="projectEndTime" column="project_end_time" javaType="java.util.Date"/>
+        <result property="projectZan" column="project_zan" javaType="java.lang.Long"/>
+        <result property="projectImgs" column="project_imgs" javaType="java.lang.String"/>
+        <result property="projectPic" column="project_pic" javaType="java.lang.String"/>
+        <result property="projectTitlePic1" column="project_title_pic1" javaType="java.lang.String"/>
+        <result property="projectTitlePic2" column="project_title_pic2" javaType="java.lang.String"/>
+        <result property="projectStatus" column="project_status" javaType="java.lang.Long"/>
+        <result property="projectSpare1" column="project_spare1" javaType="java.lang.String"/>
+            <!--<collection property="packages" ofType="com.chuangmeng.cmzc.commons.PO.TbPackage">-->
+                <!--<id property="packageId" column="package_id" javaType="java.lang.String"/>-->
+                <!--<result property="projectId" column="project_id" javaType="java.lang.String"/>-->
+                <!--<result property="packagePrice" column="package_price" javaType="java.lang.Long"/>-->
+                <!--<result property="packageNum" column="package_num" javaType="java.lang.Long"/>-->
+                <!--<result property="packageResidue" column="package_residue" javaType="java.lang.Long"/>-->
+                <!--<result property="packageInfo" column="package_info" javaType="java.lang.String"/>-->
+                <!--<result property="packagePic" column="package_pic" javaType="java.lang.String"/>-->
+                <!--<result property="packageGift" column="package_gift" javaType="java.lang.String"/>-->
+                <!--<result property="packagePostFee" column="package_post_fee" javaType="java.lang.String"/>-->
+                <!--<result property="packageReturnTime" column="package_return_time" javaType="java.lang.String"/>-->
+            <!--</collection>-->
+        </resultMap>
+    <sql id="pram">
+     project_id,type_id,business_id,project_name,project_expect_money,project_real_money,project_start_time,project_end_time,
+    project_zan,project_video,project_imgs,project_pic,project_title_pic1,project_title_pic2,project_status,project_spare1
+    </sql>
+    <select id="queryWarmUp" resultMap="warmUpMap">
+        select <include refid="pram"/>  from tb_project  where project_status=#{projectStatus} order by project_start_time limit 0,4;
+    </select>
 </mapper>
-        <!--private String projectName;-->
-        <!--private long projectExpectMoney;-->
-        <!--private long projectRealMoney;-->
-        <!--private java.util.Date projectStartTime;-->
-        <!--private java.util.Date projectEndTime;-->
-        <!--private long projectZan;-->
-        <!--private String projectVideo;-->
-        <!--private String projectImgs;-->
-        <!--private String projectPic;-->
-        <!--private String projectTitlePic1;-->
-        <!--private String projectTitlePic2;-->
-        <!--private long projectStatus;-->
-        <!--private String projectSpare1;-->
-        <!--private String projectSpare2;-->
-        <!--private List<TbPackage> packages;-->

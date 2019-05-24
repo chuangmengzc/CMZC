@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangmeng.cmzc.projectStatus.dao.ProjectStatusMapper">
+    <!--查询订单的总金额-->
+    <select id="queryAllMoney" resultType="java.lang.Integer">
+        select sum(order_money) from  tb_order  where order_status=1 and order_spare1=#{orderSpare1};
+    </select>
+    <resultMap id="queryUserAndMoneyMap" type="com.chuangmeng.cmzc.commons.dto.UserAndMoney">
+     <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="orderMoney" column="order_money" javaType="java.lang.Integer"/>
+    </resultMap>
+    <!--通过项目ID查询用户ID和订单的价钱-->
+    <select id="queryUserAndMoney" resultMap="queryUserAndMoneyMap">
+   select  user_id,order_money   from tb_order where  order_status=1 and order_spare1=#{orderSpare1} ;
+    </select>
+
+    <!--根据用户ID退款给用户-->
+    <update id="refund">
+        update tb_user set user_money=user_money+#{orderMoney} where user_id=#{userId};
+    </update>
+
+    <!--修改订单状态-->
+    <update id="updateOrderStatus">
+        update tb_order set  order_status=#{status}  where order_spare1=#{orderSpare1}
+    </update>
+    <!--增加一个流水-->
+    <insert id="addBill">
+        insert into tb_bill(bill_id, project_id, bill_cash, bill_date,bill_describe, bill_spare2) values
+        (#{billId},#{projectId},#{billCash},#{billDate},#{billDescribe},#{billSpare2})
+    </insert>
+    <!--修改项目的状态-->
+    <update id="updateProjectStatus">
+        update tb_project set project_status=-1 where project_id=#{projectId}
+    </update>
+    <!--项目-->
+    <resultMap id="projectMap" type="com.chuangmeng.cmzc.commons.PO.TbProject">
+    <id property="projectId" column="project_id" javaType="java.lang.String"/>
+    <result property="typeId" column="type_id" javaType="java.lang.String"/>
+    <result property="businessId" column="business_id" javaType="java.lang.String"/>
+    <result property="projectName" column="project_name" javaType="java.lang.String"/>
+    <result property="projectExpectMoney" column="project_expect_money" javaType="java.lang.Long"/>
+    <result property="projectRealMoney" column="project_real_money" javaType="java.lang.Long"/>
+    <result property="projectStartTime" column="project_start_time" javaType="java.util.Date"/>
+    <result property="projectEndTime" column="project_end_time" javaType="java.util.Date"/>
+    <result property="projectZan" column="project_zan" javaType="java.lang.Long"/>
+    <result property="projectImgs" column="project_imgs" javaType="java.lang.String"/>
+    <result property="projectPic" column="project_pic" javaType="java.lang.String"/>
+    <result property="projectTitlePic1" column="project_title_pic1" javaType="java.lang.String"/>
+    <result property="projectTitlePic2" column="project_title_pic2" javaType="java.lang.String"/>
+     <result property="projectStatus" column="project_status" javaType="java.lang.Long"/>
+    </resultMap>
+    <!--查询所有正在预筹中的项目-->
+    <sql id="pram">
+     project_id,type_id,business_id,project_name,project_expect_money,project_real_money,project_start_time,project_end_time,
+    project_zan,project_video,project_imgs,project_pic,project_title_pic1,project_title_pic2,project_status
+    </sql>
+    <select id="queryProject" resultMap="projectMap">
+        select <include refid="pram"/>  from tb_project where project_status=2
+    </select>
+
+    <!--众筹时间结束，修改项目的状态-->
+    <update id="updateStatus">
+        update tb_project set project_status=3 where project_id=#{projectId}
+    </update>
+
+    <!--把商家的60%给商家-->
+    <update id="giveMonet">
+        update tb_business set business_wallet=business_wallet+#{wallet} ,business_frozen=business_frozen+#{frozen} where business_id=#{businessId}
+    </update>
+
+    <!--根据项目Id查询项目-->
+    <select id="queryProjectById" resultMap="projectMap">
+        select <include refid="pram"/> from tb_project where project_id=#{projectId}
+    </select>
+    <!--返利完成，修改项目的状态-->
+    <update id="updateStatus2">
+        update tb_project set project_status=5 where project_id=#{projectId}
+    </update>
+    <!--修改订单状态为已完成-->
+    <update id="updateOrderStatus2">
+        update tb_order set  order_status=2  where order_spare1=#{orderSpare1}
+    </update>
+
+    <!--项目修改为返利中-->
+    <update id="updateStatus3">
+        update tb_project set project_status=4 where project_id=#{projectId}
+    </update>
+
+    <!--修改未付款的订单为失效订单-->
+    <update id="orderLose">
+        update tb_order set order_status=3 where order_spare1=#{projectId} and order_status=0
+    </update>
+
+    <!--开始众筹-->
+    <update id="start">
+        update tb_project set project_status=2  where project_id=#{projectId} and project_status=1
+    </update>
+    <!--查询所有准备商家的项目-->
+    <select id="queryStart" resultMap="projectMap">
+        select <include refid="pram"/>  from tb_project where project_status=1
+    </select>
+</mapper>

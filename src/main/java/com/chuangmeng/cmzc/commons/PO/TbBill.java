@@ -5,7 +5,7 @@ public class TbBill {
 
   private String billId;
   private String projectId;
-  private Integer billCash;
+  private long billCash;
   private java.sql.Timestamp billDate;
   private String billDescribe;
   private String billSpare2;
@@ -29,11 +29,11 @@ public class TbBill {
   }
 
 
-  public Integer getBillCash() {
+  public long getBillCash() {
     return billCash;
   }
 
-  public void setBillCash(Integer billCash) {
+  public void setBillCash(long billCash) {
     this.billCash = billCash;
   }
 

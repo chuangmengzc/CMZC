@@ -51,19 +51,20 @@ public  String   addProject(PackageImgsVo packageImgsVo, String TbPackage, Proje
         TbProject tbProject=new TbProject();
         tbProject.setProjectName(project.getProjectName());
         tbProject.setTypeId(project.getTypeId());
-        tbProject.setBusinessId("test1");
+        tbProject.setBusinessId("test1");   //商家ID
         tbProject.setProjectExpectMoney(project.getProjectExpectMoney());
+        tbProject.setProjectSpare1(project.getProjectSpare1());//商品描述
 //        String video = projectVideo.getOriginalFilename()+ RandString.generateString(20);
 //        String video= BackStageUtils.uploadFile(projectVideo);
         StringBuilder imgs=new StringBuilder();
         StringBuilder pic=new StringBuilder();
         for(MultipartFile multipartFile:projectImgs){
 //            imgs.append(multipartFile.getOriginalFilename()+RandString.generateString(20)+"|");
-            imgs.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT));
+            imgs.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT)+"|");
         }
         for(MultipartFile multipartFile:projectPic){
 //            pic.append(multipartFile.getOriginalFilename()+RandString.generateString(20)+"|");
-            pic.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT));
+            pic.append(BackStageUtils.uploadFile(multipartFile,DIR.PROJECT)+"|");
         }
 //        String pic1= projectTitlePic1.getOriginalFilename()+RandString.generateString(20);
         String pic1=BackStageUtils.uploadFile(projectTitlePic1,DIR.PROJECT);
@@ -74,6 +75,7 @@ public  String   addProject(PackageImgsVo packageImgsVo, String TbPackage, Proje
         tbProject.setProjectPic(pic.toString());
         tbProject.setProjectTitlePic1(pic1);
         tbProject.setProjectTitlePic2(pic2);
+
         String[] p=TbPackage.split("\\$");
         List<TbPackage> packages=new ArrayList<>();
         int i=1;

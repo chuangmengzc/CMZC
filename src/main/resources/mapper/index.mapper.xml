@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuangmeng.cmzc.index.dao.IndexMapper">
+    <!--项目-->
+    <resultMap id="projectMap" type="com.chuangmeng.cmzc.commons.PO.TbProject">
+        <id property="projectId" column="project_id" javaType="java.lang.String"/>
+        <result property="typeId" column="type_id" javaType="java.lang.String"/>
+        <result property="businessId" column="business_id" javaType="java.lang.String"/>
+        <result property="projectName" column="project_name" javaType="java.lang.String"/>
+        <result property="projectExpectMoney" column="project_expect_money" javaType="java.lang.Long"/>
+        <result property="projectRealMoney" column="project_real_money" javaType="java.lang.Long"/>
+        <result property="projectStartTime" column="project_start_time" javaType="java.util.Date"/>
+        <result property="projectEndTime" column="project_end_time" javaType="java.util.Date"/>
+        <result property="projectZan" column="project_zan" javaType="java.lang.Long"/>
+        <result property="projectImgs" column="project_imgs" javaType="java.lang.String"/>
+        <result property="projectPic" column="project_pic" javaType="java.lang.String"/>
+        <result property="projectTitlePic1" column="project_title_pic1" javaType="java.lang.String"/>
+        <result property="projectTitlePic2" column="project_title_pic2" javaType="java.lang.String"/>
+        <result property="projectStatus" column="project_status" javaType="java.lang.Long"/>
+        <result property="projectSpare1" column="project_spare1" javaType="java.lang.String"/>
+
+    </resultMap>
+   <!--热门推荐-->
+    <sql id="pram">
+     project_id,type_id,business_id,project_name,project_expect_money,project_real_money,project_start_time,project_end_time,
+    project_zan,project_video,project_imgs,project_pic,project_title_pic1,project_title_pic2,project_status,project_spare1
+    </sql>
+    <select id="queryHot" resultMap="projectMap">
+        select <include refid="pram"/> from tb_project where project_status=2 order by project_zan desc limit 0,8;
+    </select>
+
+    <!--最新上架-->
+    <select id="queryNew" resultMap="projectMap">
+        select <include refid="pram"/> from tb_project where project_status=2 order by project_start_time desc limit 0,8
+    </select>
+<!--即将结束-->
+    <resultMap id="EndMap" type="com.chuangmeng.cmzc.commons.dto.EndProject">
+        <id property="projectId" column="project_id" javaType="java.lang.String"/>
+        <result property="projectName" column="project_name" javaType="java.lang.String"/>
+        <result property="projectExpectMoney" column="project_expect_money" javaType="java.lang.Long"/>
+        <result property="projectRealMoney" column="project_real_money" javaType="java.lang.Long"/>
+        <result property="projectStartTime" column="project_start_time" javaType="java.util.Date"/>
+        <result property="projectEndTime" column="project_end_time" javaType="java.util.Date"/>
+        <result property="projectTitlePic2" column="project_title_pic2" javaType="java.lang.String"/>
+        <result property="projectSpare1" column="project_spare1" javaType="java.lang.String"/>
+    </resultMap>
+    <!--即将结束-->
+    <select id="queryEnd" resultMap="EndMap">
+        select project_id,project_name,project_expect_money,project_real_money,project_start_time,project_end_time,project_title_pic2,project_spare1
+         from tb_project where project_status=2 order by project_end_time  limit 0,16
+    </select>
+
+    <!--分类-->
+    <resultMap id="typeMap" type="com.chuangmeng.cmzc.commons.dto.FProjectType">
+        <id property="typeName1" column="type_name1" javaType="java.lang.String"/>
+        <collection property="sProjectTypes" ofType="com.chuangmeng.cmzc.commons.dto.SProjectType">
+            <id property="typeName2" column="type_name2" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <!--查询6F的分类-->
+    <select id="queryType" resultMap="typeMap">
+        select t.type_name type_name1,f.type_name type_name2   from tb_project_type t
+        inner join tb_project_type f on t.type_id=f.type_fid
+    </select>
+    <!--查询6F的第一个项目-->
+    <resultMap id="projectMap2" type="com.chuangmeng.cmzc.commons.dto.FirFProject">
+        <id property="projectId" column="project_id" javaType="java.lang.String"/>
+        <result property="typeId" column="type_id" javaType="java.lang.String"/>
+        <result property="businessId" column="business_id" javaType="java.lang.String"/>
+        <result property="projectName" column="project_name" javaType="java.lang.String"/>
+        <result property="projectExpectMoney" column="project_expect_money" javaType="java.lang.Long"/>
+        <result property="projectRealMoney" column="project_real_money" javaType="java.lang.Long"/>
+        <result property="projectStartTime" column="project_start_time" javaType="java.util.Date"/>
+        <result property="projectEndTime" column="project_end_time" javaType="java.util.Date"/>
+        <result property="projectZan" column="project_zan" javaType="java.lang.Long"/>
+        <result property="projectImgs" column="project_imgs" javaType="java.lang.String"/>
+        <result property="projectPic" column="project_pic" javaType="java.lang.String"/>
+        <result property="projectTitlePic1" column="project_title_pic1" javaType="java.lang.String"/>
+        <result property="projectTitlePic2" column="project_title_pic2" javaType="java.lang.String"/>
+        <result property="projectStatus" column="project_status" javaType="java.lang.Long"/>
+        <result property="projectSpare1" column="project_spare1" javaType="java.lang.String"/>
+
+    </resultMap>
+    <select id="queryFirstProject" resultMap="projectMap2">
+        select * from tb_project where   project_status=2 and type_id=#{projecrType}
+      order by project_zan  desc limit 0,1;
+    </select>
+    <!--查询6F的后面六个项目-->
+    <select id="querySixProject" resultMap="EndMap">
+        select * from tb_project where   project_status=2 and type_id=#{projecrType}
+        order by project_zan  desc limit 1,6;
+    </select>
+    <!--根据类型name获取类型Id-->
+    <select id="queryId" resultType="java.lang.String">
+     select type_id from tb_project_type where type_name=#{typeName} and type_fid!=''
+    </select>
+    
+    
+    <!--查看故事-->
+    <resultMap id="storyMap" type="com.chuangmeng.cmzc.commons.PO.TbStory">
+        <id property="storyId" column="story_id" javaType="java.lang.Long"/>
+        <result property="storyTotle" column="story_totle" javaType="java.lang.String"/>
+        <result property="storyInfo" column="story_info" javaType="java.lang.String"/>
+        <result property="storySpare1" column="story_spare1" javaType="java.lang.String"/>
+        <result property="storySpare2" column="story_spare2" javaType="java.lang.String"/>
+    </resultMap>
+    
+    <select id="queryStory" resultMap="storyMap">
+        select story_totle,story_info,story_id,story_spare1,story_spare2 from tb_story  limit 0,4;
+    </select>
+    <!--项目类型查询-->
+    <resultMap id="TypeMap" type="com.chuangmeng.cmzc.commons.PO.TbProjectType">
+        <id property="typeId" column="type_id" javaType="java.lang.String"/>
+        <result property="typeFid" column="type_fid" javaType="java.lang.String"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="queryAllType" resultMap="TypeMap">
+        select type_id,type_fid,type_name  from tb_project_type where type_fid!=''
+    </select>
+
+    <!--项目的搜索功能-->
+    <select id="search" resultMap="projectMap2">
+        select * from tb_project
+        <where>
+            <if test="categoryId != null">
+                type_id = #{categoryId}
+            </if>
+            <if test="key != null">
+                and   project_name like CONCAT(CONCAT('%', #{key}),'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

@@ -1,10 +1,12 @@
 package com.chuangmeng.cmzc.commons.PO;
 
 
+import com.chuangmeng.cmzc.commons.dto.Project;
+
 import java.util.Date;
+import java.util.List;
 
 public class TbProject {
-
   private String projectId;
   private String typeId;
   private String businessId;
@@ -159,4 +161,5 @@ public class TbProject {
   public void setProjectSpare2(String projectSpare2) {
     this.projectSpare2 = projectSpare2;
   }
+
 }
